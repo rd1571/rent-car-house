@@ -67,7 +67,7 @@
                     <div class="navbar-end">
                         <div class="navbar-end">
                             <router-link class="navbar-item" to="/">Home</router-link>
-                            <router-link class="navbar-item" to="/shop">Stores</router-link>
+                            <router-link class="navbar-item" to="/shop">Store</router-link>
                             <router-link class="navbar-item" to="/rent">
                                 <span class="button is-white is-outlined">For Rent</span>
                             </router-link>
