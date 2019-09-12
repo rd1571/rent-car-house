@@ -2,8 +2,7 @@
     <div class="products-banner">
         <div class="is-hidden-mobile ais-Stats">
             <section class="section">
-                <div class="container">                    
-
+                <div class="container">
                     <b-tabs position="is-right" class="block">
                         <b-tab-item label="Cars" icon="car">
                             <nav class="level">
@@ -13,17 +12,7 @@
                                             <strong>50&nbsp;</strong>Cars
                                         </p>
                                     </div>
-                                </div>
-                                <!-- <div class="level-right">
-                                    <p class="level-item">
-                                        <a>Cars</a>
-                                    </p>
-                                    <p class="level-item">
-                                        <strong>Houses</strong>
-                                    </p>
-                                    
-                                </div> -->
-                                
+                                </div>                                
                             </nav>
                             <Cars />
                         </b-tab-item>
@@ -35,19 +24,9 @@
                                             <strong>50&nbsp;</strong>Houses
                                         </p>
                                     </div>
-                                </div>
-                                <!-- <div class="level-right">
-                                    <p class="level-item">
-                                        <a>Cars</a>
-                                    </p>
-                                    <p class="level-item">
-                                        <strong>Houses</strong>
-                                    </p>
-                                    
-                                </div> -->
-                                
+                                </div>                                
                             </nav>
-                            <Cars />
+                            <House />
                         </b-tab-item>
                     </b-tabs>
                 </div>
@@ -58,10 +37,11 @@
 
 <script>
     import Cars from '@/views/Cars.vue'
+    import House from '@/views/House.vue'
 
     export default {
         components: {
-            Cars
+            Cars, House
         }
     }
 </script>
