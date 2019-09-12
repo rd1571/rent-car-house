@@ -68,9 +68,10 @@
                         <div class="navbar-end">
                             <router-link class="navbar-item" to="/">Home</router-link>
                             <router-link class="navbar-item" to="/shop">Store</router-link>
-                            <router-link class="navbar-item" to="/rent">
-                                <span class="button is-white is-outlined">For Rent</span>
+                            <router-link class="navbar-item" to="/about">
+                                <span class="button is-white is-outlined">About Us</span>
                             </router-link>
+                            <router-link class="navbar-item" to="/contact">Contact Us</router-link>
                             <router-link class="navbar-item" to="/login">Log in</router-link>
                         </div>
                     </div>

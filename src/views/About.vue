@@ -1,5 +1,5 @@
 <template>
-  <div class="rent">
+  <div class="about-us">
 
     <div class="hero is-large is-info">
       <Navbar />
@@ -11,7 +11,7 @@
   import Navbar from '@/components/Navbar.vue'
   
   export default {
-    name: 'rent',
+    name: 'about',
     components: {
       Navbar
     }

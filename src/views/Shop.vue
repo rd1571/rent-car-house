@@ -6,21 +6,21 @@
     </div>
 
     <Banner />
-    <ProductsView />
+    <!-- <ProductsView /> -->
   </div>
 </template>
 
 <script>
   import Navbar from '@/components/Navbar.vue'
   import Banner from '@/components/ProductsBanner.vue'
-  import ProductsView from '@/components/ProductsView.vue'
+  // import ProductsView from '@/components/ProductsView.vue'
   
   export default {
     name: 'shop',
     components: {
       Navbar,
       Banner,
-      ProductsView
+      // ProductsView
     }
   }
 </script>
