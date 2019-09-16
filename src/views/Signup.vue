@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="register">
 
     <div class="hero is-large is-info is-fullheight">
         <Navbar />
@@ -13,12 +13,14 @@
                                 <b-input type="email"
                                     placeholder="john_doe@email.com"
                                     maxlength="30"
+                                    v-model="email"
                                     icon="email">
                                 </b-input>
                             </b-field>
                             <b-field>
                                 <b-input type="password"
                                     placeholder="Password"
+                                    v-model="password"
                                     password-reveal>
                                 </b-input>
                             </b-field>
@@ -31,27 +33,13 @@
                                 </label>
                             </b-field>
                             <b-field>
-                                <b-button type="is-info">Submit</b-button>
+                                <b-button v-on:click="onSignup" type="is-info">Sign up</b-button>
                             </b-field>
                         </form>
-
-                        <div class="box">
-                            <div class="columns is-centered">
-                                <div class="column has-text-centered">
-                                    Create an account? <router-link :to="{name: 'signup'}">Sign up</router-link>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
-                    
                 </div>
-
-                
             </div>
         </div>
-
-        
         
     </div>
     
@@ -59,20 +47,38 @@
 </template>
 
 <script>
-  import Navbar from '@/components/Navbar.vue'
-  
-  export default {
-    name: 'login',
-    components: {
-      Navbar
-    },
+    import Navbar from '@/components/Navbar.vue'
+    import firebase from 'firebase'
 
-    data() {
-        return {
-            name: 'Ram Alcantara'
+  
+    export default {
+        name: 'signup',
+        components: {
+        Navbar
+        },
+
+        data() {
+            return {
+                name: 'Ram Alcantara',
+                email: '',
+                password: ''
+            }
+        },
+
+        methods: {
+            onSignup() {
+                firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+                    function( user ) {
+                        alert(`You are now connected!${user.user.email}`);
+                    },
+                    function (error) {
+                        alert('Oops.' + error.message);
+                    }
+                );
+
+            },
         }
     }
-  }
 </script>
 
 <style scoped>

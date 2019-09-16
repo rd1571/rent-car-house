@@ -4,7 +4,9 @@
             <section class="section">
                 <div class="container">
                     <b-tabs position="is-right" class="block">
+                        
                         <b-tab-item label="Cars" icon="car">
+                            
                             <nav class="level">
                                 <div class="level-left">
                                     <div class="level-item">
