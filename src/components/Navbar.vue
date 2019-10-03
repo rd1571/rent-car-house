@@ -14,23 +14,49 @@
                     </a>
                 </div>
 
-                <div id="navbarBasicExample" class="navbar-menu">
+                <div id="navbar-site" class="navbar-menu">
                     <div class="navbar-end">
-                        <div class="navbar-end">
-
-                            <router-link class="navbar-item" :to="{ name: 'shop' }">Store</router-link>
-                            <router-link class="navbar-item" :to="{ name: 'about' }">About Us</router-link>
-                            <router-link class="navbar-item" :to="{ name: 'contact' }">
-                                <span class="button is-white is-outlined">Contact Us</span>
-                            </router-link>
-                            <router-link class="navbar-item" :to="{ name: 'login' }">Log in</router-link>
-                        </div>
+                        <router-link v-if="!isLoggedIn" class="navbar-item" :to="{ name: 'shop' }">Store</router-link>
+                        <router-link v-if="!isLoggedIn" class="navbar-item" :to="{ name: 'about' }">About Us</router-link>
+                        <router-link v-if="!isLoggedIn" class="navbar-item" :to="{ name: 'contact' }">
+                            <span class="button is-white is-outlined">Contact Us</span>
+                        </router-link>
+                        <router-link v-if="!isLoggedIn" class="navbar-item" :to="{ name: 'login' }">Log in</router-link>
+                        <a v-if="isLoggedIn" v-on:click="onLogout" class="navbar-item"> Logout </a>
                     </div>
                 </div>
             </nav>
         </div>
     </div>
 </template>
+
+<script>
+    import firebase from 'firebase'
+    export default {
+        name: 'navbar',
+        data() {
+            return {
+                isLoggedIn: false,
+                currentUser: false
+            }
+        },
+        created() {
+            if (firebase.auth().currentUser) {
+                this.isLoggedIn = true;
+                this.currentUser = firebase.auth().currentUser.email;
+            }
+        },
+        methods: {
+            onLogout() {
+                firebase.auth().signOut.then(() => {
+                    this.$router.go({
+                        path: this.$router.path
+                    });
+                });
+            }
+        }
+    }
+</script>
 
 <style>
 

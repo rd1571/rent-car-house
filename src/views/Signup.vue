@@ -8,33 +8,27 @@
             <div class="container">
                 <div class="columns is-centered">
                     <div class="column is-5-tablet is-4-desktop is-3-widescreen">
-                        <form class="box">
-                            <b-field label="Email">
-                                <b-input type="email"
-                                    placeholder="john_doe@email.com"
-                                    maxlength="30"
-                                    v-model="email"
-                                    icon="email">
-                                </b-input>
-                            </b-field>
-                            <b-field>
-                                <b-input type="password"
-                                    placeholder="Password"
-                                    v-model="password"
-                                    password-reveal>
-                                </b-input>
+                        <form class="box" @submit.prevent="onSignup">
+
+                            <b-field label="Email"
+                                :type="{'is-danger': errors.has('email')}"
+                                :message="errors.first('email')">
+                                <b-input v-model="email" name="email" v-validate="'required'" icon="email"/>
                             </b-field>
 
-                        
-                            <b-field>
-                                <label for="" class="checkbox">
-                                    <input type="checkbox">
-                                Remember me
-                                </label>
+                            <b-field label="Password"
+                                :type="{'is-danger': errors.has('password')}"
+                                :message="errors.first('password')">
+                                <b-input 
+                                    type="password" 
+                                    v-model="password" 
+                                    name="password" 
+                                    v-validate="'required|min:6'"
+                                    icon="key"
+                                    password-reveal/>
                             </b-field>
-                            <b-field>
-                                <b-button v-on:click="onSignup" type="is-info">Sign up</b-button>
-                            </b-field>
+
+                            <button type="submit" class="button is-primary"> Submit </button>
                         </form>
                     </div>
                 </div>
@@ -47,14 +41,18 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     import Navbar from '@/components/Navbar.vue'
     import firebase from 'firebase'
+    import VeeValidate from 'vee-validate'
+
+    Vue.use(VeeValidate);
 
   
     export default {
         name: 'signup',
         components: {
-        Navbar
+            Navbar
         },
 
         data() {
@@ -67,14 +65,38 @@
 
         methods: {
             onSignup() {
-                firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-                    function( user ) {
-                        alert(`You are now connected!${user.user.email}`);
-                    },
-                    function (error) {
-                        alert('Oops.' + error.message);
+
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        this.$buefy.toast.open({
+                            message: 'Form is valid!',
+                            type: 'is-success',
+                            position: 'is-top'
+                        })
+
+                        firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+                        .then(user => {
+                            this.$buefy.dialog.alert({
+                                title: 'Success',
+                                message: 'You have successfully registered an account!',
+                                type: 'is-success',
+                                hasIcon: true,
+                                icon: 'check-circle',
+                                iconPack: 'fa'
+                            });
+                            this.$router.go({
+                                path: this.$router.path
+                            });
+                        });
+
+                        return;
                     }
-                );
+                    this.$buefy.toast.open({
+                        message: 'Form is not valid! Please check the fields.',
+                        type: 'is-danger',
+                        position: 'is-top'
+                    })
+                });
 
             },
         }
