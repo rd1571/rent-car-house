@@ -76,17 +76,11 @@
 
                         firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
                         .then(user => {
-                            this.$buefy.dialog.alert({
-                                title: 'Success',
-                                message: 'You have successfully registered an account!',
-                                type: 'is-success',
-                                hasIcon: true,
-                                icon: 'check-circle',
-                                iconPack: 'fa'
-                            });
-                            this.$router.go({
-                                path: this.$router.path
-                            });
+                            // this.$router.go({
+                            //     path: this.$router.path
+                            // });
+
+                            this.$router.push('/login');
                         });
 
                         return;

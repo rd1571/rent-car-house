@@ -88,17 +88,10 @@
 
                         firebase.auth().signInWithEmailAndPassword(this.email, this.password)
                         .then(user => {
-                            this.$buefy.dialog.alert({
-                                title: 'Success',
-                                message: 'You have successfully logged In',
-                                type: 'is-success',
-                                hasIcon: true,
-                                icon: 'check-circle',
-                                iconPack: 'fa'
-                            });
-                            this.$router.go({
-                                path: this.$router.path
-                            });
+                            // this.$router.go({
+                            //     path: this.$router.path
+                            // });
+                            this.$router.push('/');
                         });
 
                         return;

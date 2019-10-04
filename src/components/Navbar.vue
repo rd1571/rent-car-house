@@ -16,9 +16,9 @@
 
                 <div id="navbar-site" class="navbar-menu">
                     <div class="navbar-end">
-                        <router-link v-if="!isLoggedIn" class="navbar-item" :to="{ name: 'shop' }">Store</router-link>
-                        <router-link v-if="!isLoggedIn" class="navbar-item" :to="{ name: 'about' }">About Us</router-link>
-                        <router-link v-if="!isLoggedIn" class="navbar-item" :to="{ name: 'contact' }">
+                        <router-link class="navbar-item" :to="{ name: 'shop' }">Store</router-link>
+                        <router-link class="navbar-item" :to="{ name: 'about' }">About Us</router-link>
+                        <router-link class="navbar-item" :to="{ name: 'contact' }">
                             <span class="button is-white is-outlined">Contact Us</span>
                         </router-link>
                         <router-link v-if="!isLoggedIn" class="navbar-item" :to="{ name: 'login' }">Log in</router-link>
@@ -32,6 +32,7 @@
 
 <script>
     import firebase from 'firebase'
+
     export default {
         name: 'navbar',
         data() {
@@ -48,10 +49,13 @@
         },
         methods: {
             onLogout() {
-                firebase.auth().signOut.then(() => {
+                firebase.auth().signOut().then(() => {
+                    // Sign-out successful.
                     this.$router.go({
                         path: this.$router.path
                     });
+                }).catch(function(error) {
+                    // An error happened.
                 });
             }
         }
