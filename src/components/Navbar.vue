@@ -51,9 +51,10 @@
             onLogout() {
                 firebase.auth().signOut().then(() => {
                     // Sign-out successful.
-                    this.$router.go({
-                        path: this.$router.path
-                    });
+                    // this.$router.go({
+                    //     path: this.$router.path
+                    // });
+                    this.$router.push('/');
                 }).catch(function(error) {
                     // An error happened.
                 });
